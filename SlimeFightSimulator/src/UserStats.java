@@ -7,4 +7,8 @@ public class UserStats {
     public int getUserLevel(){
         return userLevel;
     }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
+    }
 }
