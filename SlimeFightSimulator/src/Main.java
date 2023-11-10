@@ -29,8 +29,13 @@ public class Main {
         System.out.println("You head out to Wispy Meadows. To walk around click enter. Maybe you will encounter a new teammate.");
 
         if(s.nextLine().equals("")){
+if(random<=3)
             System.out.println("Walked forward. Nothing here...");
-        }
+        } else {
+Slime wildSlime= new GenerateSlime(us.getUserLevel(),
+
+
+}
 
 
 
