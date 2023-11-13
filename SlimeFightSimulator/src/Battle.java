@@ -49,21 +49,32 @@ public class Battle {
         }
         return action;
     }
+
+    public Move opponentAttack(int moveNumber){
+        Move action = null;
+        if (moveNumber == 1){
+            action = wildSlime.getMoveSet().getMove1();
+        } else if (moveNumber == 2) {
+            action = wildSlime.getMoveSet().getMove2();
+        } else if (moveNumber == 3) {
+            action = wildSlime.getMoveSet().getMove3();
+        } else {
+            action = wildSlime.getMoveSet().getMove4();
+        }
+        if(action.getActionType().equals("Combat")){
+            int totalDamage = wildSlime.getAttackPower()*action.Effectiveness();
+            activeSlime.setHealth(activeSlime.getHealth()-totalDamage);
+        } else if(action.getActionType().equals("Healing")){
+            int totalHealed = wildSlime.getHealthCap()/action.Effectiveness();
+            wildSlime.setHealth(Math.min(totalHealed+wildSlime.getHealth(), activeSlime.getHealthCap()));
+        }
+
+        return action;
+    }
     public Slime getWildSlime(){
         return wildSlime;
     }
     public Slime getActiveSlime(){
         return activeSlime;
-    }
-    public Move wildAttack(){
-        int random = GenerateSlime.randomNumber(4);
-        Move action = null;
-        if(random == 1){
-            action = wildSlime.getMoveSet().getMove1();
-        } else if (random == 2) {
-            action = wildSlime.getMoveSet().getMove2();
-        } else if (random == 3) {
-            action = wildSlime.getMoveSet().getMove3();
-        }
     }
 }
