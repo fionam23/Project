@@ -10,8 +10,6 @@ public class GenerateSlime {
     private Slime newSlime;
     private int rarityMultiplier;
 
-    int random0to4 = (int) Math.random()*10;
-
 
     //multipliers
 
@@ -44,6 +42,26 @@ public class GenerateSlime {
     public void setAll(){
         setHealth();
         setAttackPower();
+    }
+
+    public static int randomNumber(int range){
+        return  (int) (Math.random()*range);
+    }
+
+    public static String pickRandomType(){
+        int random = randomNumber(6)+1;      // param is the number of types available
+        if (random== 1){
+            return "p";
+        } else if (random==2) {
+            return "c";
+        } else if (random==3) {
+            return "h";
+        } else if (random==4) {
+            return "e";
+        } else if (random==5) {
+            return "s";
+        }
+        return "l";
     }
 
 
