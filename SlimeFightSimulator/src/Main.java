@@ -41,11 +41,10 @@ public class Main {
                     Slime activeSlime = newBattle.getActiveSlime();
                     int wildSlimeHealth = wildSlime.getHealthCap();
                     System.out.println(Battle.commenceBattle(us));
-                    for(int i = 0; wildSlime.getHealth()>0; i++){
+                    for(int i = 0; wildSlime.getHealth()>0 && activeSlime.getHealth()>0; i++){
                         System.out.println(Battle.Menu());
                         input = s.nextLine();
                         if(input.equalsIgnoreCase("F")){
-
                             System.out.println(Battle.displayMoveSet());
                             System.out.println("Type the move you want to use.");
                             input = s.nextLine();
@@ -54,8 +53,13 @@ public class Main {
                                 System.out.println(activeSlime.slimeName+" used "+moveUsed.getMoveName()+". It did "+(wildSlimeHealth-wildSlime.getHealth())+" damage!");
                                 System.out.println(newBattle.getWildSlime().slimeName+"'s HP: "+newBattle.getWildSlime().getHealth());
                                 wildSlimeHealth -= wildSlimeHealth-wildSlime.getHealth();
-                                Move thingy =
-                                System.out.println(wildSlime.slimeName+" retaliates with ");
+                                Move response = newBattle.opponentAttack(1);
+                                if(response.getActionType().equals("Combat")){
+                                    System.out.println(wildSlime.slimeName+" used "+response.getMoveName()+".");
+                                    System.out.println(activeSlime.slimeName+"'s health is now "+activeSlime.getHealth());
+                                } else if (response.getActionType().equals("Healing")) {
+                                    System.out.println(wildSlime.slimeName+" used "+response.getMoveName()+". They were healed for ");
+                                }
                             } else {
                                 System.out.println("That isn't a move!");
                             }
@@ -65,6 +69,26 @@ public class Main {
                             wildSlime.setHealth(0);
                         }
 
+                    }
+                    if(wildSlimeHealth <= 0){
+                        System.out.println("You successfully defeated "+wildSlime.slimeName+"! Would you like to keep the new slime? (y/n)");
+                        input = s.nextLine();
+                        while(!input.equalsIgnoreCase("y")||input.equalsIgnoreCase("n")){
+                            System.out.println("You successfully defeated "+wildSlime.slimeName+"! Would you like to keep the new slime? (y/n)");
+                            input = s.nextLine();
+                        }
+
+                        while (!input.equalsIgnoreCase("y")||input.equalsIgnoreCase("n")){
+                            System.out.println("Would you like to name your new"+wildSlime.slimeName+" slime?");
+                            input = s.nextLine();
+                        }
+                        if(input.equalsIgnoreCase("y")){
+                            System.out.println("Type the name.");
+                            wildSlime.setSlimeName(s.nextLine());
+                            System.out.println(wildSlime.slimeName+" was sent to your box!");
+                        } else {
+                            System.out.println(wildSlime.slimeName+" was sent to your box!");
+                        }
                     }
 
             }
