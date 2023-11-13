@@ -8,10 +8,11 @@ public class GenerateMoves {
 
     private boolean specialMove = false;
     public GenerateMoves(Slime slime){
-        if (GenerateSlime.randomNumber(30)==1){
+        int random =GenerateSlime.randomNumber(30);
+        if (random==1){
             specialMove = true;
         }
-        int random =GenerateSlime.randomNumber();
+
         if(Objects.equals(slime.getType(), "Pyro")){
             if(specialMove){
                 move1 = ListOfMoves.Combust;
